@@ -66,7 +66,7 @@
 
 
     function loadCountries() {
-        fetch('restservices/countries/')
+        fetch('restservices/countries')
             .then(response => response.json())
             .then(function (data) {
                 for (const country of data) {
@@ -122,7 +122,7 @@
 
                     deleteElement.addEventListener('click', function () {
                         var fetchOptions = {method: 'DELETE', headers: {'Authorization': 'Bearer ' + window.sessionStorage.getItem("myJWT")}};
-                        fetch("restservices/countries/" + this.id, fetchOptions)
+                        fetch("restservices/countries" + this.id, fetchOptions)
                             .then(function (response) {
                                 if (response.ok) {
                                     alert("Land verwijderd!");
@@ -242,7 +242,7 @@
             var encData = new URLSearchParams(formData.entries());
             var fetchOptions = {method: "PUT", body: encData};
             console.log(fetchOptions);
-            fetch("restservices/countries/" + document.getElementById("editCode").value , fetchOptions)
+            fetch("restservices/countries" + document.getElementById("editCode").value , fetchOptions)
                 .then(response => response.json())
                 .then(function (myJson){
                     if(response.ok){
