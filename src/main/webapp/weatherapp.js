@@ -122,7 +122,7 @@
 
                     deleteElement.addEventListener('click', function () {
                         var fetchOptions = {method: 'DELETE', headers: {'Authorization': 'Bearer ' + window.sessionStorage.getItem("myJWT")}};
-                        fetch("restservices/countries" + this.id, fetchOptions)
+                        fetch("restservices/countries/" + this.id, fetchOptions)
                             .then(function (response) {
                                 if (response.ok) {
                                     alert("Land verwijderd!");
@@ -216,7 +216,7 @@
             console.log(window.sessionStorage.getItem("sessionToken"));
             var fetchOptions = {method: "PUT", body: encData, headers: {'Authorization': 'Bearer ' + window.sessionStorage.getItem("myJWT")}};
             console.log(fetchOptions);
-            fetch("restservices/countries/addcountry", fetchOptions)
+            fetch("restservices/countries/addcountry/", fetchOptions)
                 .then(response => response)
                 .then(function (myJson) {
                     console.log(myJson);
@@ -242,7 +242,7 @@
             var encData = new URLSearchParams(formData.entries());
             var fetchOptions = {method: "PUT", body: encData};
             console.log(fetchOptions);
-            fetch("restservices/countries" + document.getElementById("editCode").value , fetchOptions)
+            fetch("restservices/countries/" + document.getElementById("editCode").value , fetchOptions)
                 .then(response => response.json())
                 .then(function (myJson){
                     if(response.ok){
