@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Javascript Excercises</title>
+
+</head>
+    <div class="container">
+    <div class="item item-header" id="test" ></div>
+
+    <button id="acKnop"     class="btn silver">AC</button>
+    <button id="testKnop"   class="btn silver">T</button>
+    <button id="resetKnop"  class="btn silver">R</button>
+    <button id="deelKnop"  class="btn orange">/</button>
+
+    <button id="zevenKnop"  class="btn">7</button>
+    <button id="achtKnop"   class="btn">8</button>
+    <button id="negenKnop"  class="btn">9</button>
+    <button id="keerKnop"   class="btn orange">X</button>
+
+    <button id="vierKnop"   class="btn">4</button>
+    <button id="vijfKnop"   class="btn">5</button>
+    <button id="zesKnop"    class="btn">6</button>
+    <button id="minKnop"    class="btn orange">-</button>
+
+    <button id="eenKnop"    class="btn">1</button>
+    <button id="tweeKnop"   class="btn">2</button>
+    <button id="drieKnop"   class="btn">3</button>
+    <button id="plusKnop"   class="btn orange">+</button>
+
+    <button id="nulKnop"    class="btn">0</button>
+    <button id="nullKnop"   class="btn">0</button>
+    <button id="puntKnop"   class="btn">.</button>
+    <button id="isKnop"     class="btn orange">=</button>
+
+</div>
+<style>
+    body {
+        font-size: 64px;
+        background-color: black;
+    }
+    .container {
+        display: grid;
+        justify-content: center;
+        grid-template-columns: 80px 80px 80px 80px;
+        grid-template-rows: 80px 80px;
+        grid-template-areas:
+                "header header header header"
+                "main main main main"
+                "main main main main"
+                "main main main main"
+                "main main main main"
+                "main main main main";
+    }
+    .item-header {
+        grid-area: header;
+        grid-row-start: 1;
+        grid-row-end: 1;
+        background-color: black;
+        color: white;
+        text-align: right;
+    }
+    .btn {
+        background-color: dimgray;
+        border: none;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        margin: 4px 2px;
+        border-radius: 50%;
+    }
+    .silver {
+        background-color: silver;
+        color: black;
+    }
+    .orange {
+        background-color: orange;
+    }
+    button {
+        font-size: 26px;
+    }
+</style>
+<script src="rekenmachine.js"></script>
+</body>
+</html>

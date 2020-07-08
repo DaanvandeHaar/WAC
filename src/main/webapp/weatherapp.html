@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>test</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+<button class="open-button" onclick="openForm()">Land Toevoegen</button>
+
+<div class="form-popup" name="opslaanForm" id="opslaanForm">
+    <form id="formOpslaan" class="form-container">
+        <h1>Land Toevoegen</h1>
+
+        <label><b>Naam</b></label>
+        <input type="text" placeholder="Voer de naam van het land in" name="saveCode"   required/>
+
+        <label><b>Code</b></label>
+        <input type="text" placeholder="Voer de landcode in" name="saveName"  required/>
+
+        <label><b>Hoofdstad</b></label>
+        <input type="text" placeholder="Voer de hoofdstad in"  name="saveCapital" required/>
+
+        <label ><b>Regio</b></label>
+        <input type="text" placeholder="Voer de regio in" name="saveRegion"  required/>
+
+        <label ><b>Opervlakte</b></label>
+        <input type="number" placeholder="Voer de opervlakte in" name="saveSurface"  required/>
+
+        <label ><b>Inwoners</b></label>
+        <input type="number" placeholder="Voer het aantal inwoners in" name="savePopulation"  required/>
+
+        <button type="button" id="opslaan" value="opslaan" class="btn">Opslaan</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+    </form>
+</div>
+
+
+<div class="form-popup" name="AanpasForm" id="aanpasForm">
+    <form id="formAanpassen" class="form-container">
+        <h1>Land Wijzigen</h1>
+
+        <label><b>Naam</b></label>
+        <input type="text" placeholder="Voer de naam van het land in" name="editName" id="editName" required/>
+
+        <label><b>Code</b></label>
+        <input type="text" placeholder="Voer de code van het land in" name="editCode" id="editCode" required/>
+
+        <label><b>Hoofdstad</b></label>
+        <input type="text" placeholder="Voer de hoofdstad in"  name="editCapital" id="editCapital" required/>
+
+        <label ><b>Regio</b></label>
+        <input type="text" placeholder="Voer de regio in" name="editRegion" id="editRegion" required/>
+
+        <label ><b>Opervlakte</b></label>
+        <input type="number" placeholder="Voer de opervlakte in" name="editSurface" id="editSurface"  required/>
+
+        <label ><b>Inwoners</b></label>
+        <input type="number" placeholder="Voer het aantal inwoners in" name="editPopulation" id="editPopulation"  required/>
+
+        <button type="button" id="editOpslaan" value="editOpslaan" class="btn">Opslaan</button>
+        <button type="button" class="btn cancel" onclick="closeForm2()">Cancel</button>
+    </form>
+</div>
+
+<div id="frame" class="row">
+    <div id="myLocation" class="main">
+        <p class="headers">Huidige locatie</p>
+        <p id="countryCode" ></p>
+        <p id="country" ></p>
+        <p id="region"></p>
+        <p id="city"></p>
+        <p id="postCode"></p>
+        <p id="latitude"></p>
+        <p id="longitude"></p>
+        <p id="ip"></p>
+    </div>
+
+    <div id="showWeather" class="side">
+        <p class = headers>Huidige weer informatie</p>
+        <p id="temp"> </p>
+        <p id="humid"></p>
+        <p id="wind"></p>
+        <p id="windDir"></p>
+        <p id="sunUp"></p>
+        <p id="sunDown"></p>
+    </div>
+
+    <div id="countryList" style="overflow-x:auto;">
+			<p class="headers">Beschikbare vakantiebestemmingen  </p>
+			<table id="tabel" class="countryList">
+				<tr style="text-align: left">
+					<th>Land</th>
+					<th>Hoofdstad</th>
+					<th>Regio</th>
+					<th>Oppervlakte</th>
+					<th>Inwoners</th>
+				</tr>
+			</table>
+		</div>
+    
+</div>
+
+<style>
+
+    body{
+        font-family: 'Roboto', sans-serif;
+    }
+    .headers{
+        background-color: #eee;
+        color: #444;
+        padding: 18px;
+        width: 100%;
+        text-align: left;
+        border: none;
+        outline: none;
+        transition: 0.4s;
+        font-size: 20px;
+    }
+    .countryList{
+        width: 100%;
+    }
+    tr:hover{
+        background-color: #444;
+        color:white;
+    }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        border: 1px solid #ddd;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2}
+    tr:nth-child(even):hover{
+        background-color: black;
+        color:white;
+    }
+    .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        text-align: left;
+        border: none;
+        outline: none;
+        transition: 0.4s;
+        font-size:20px;
+    }
+
+    .accordion:hover {
+        background-color: #ccc;
+    }
+
+    .panel {
+        padding: 0 18px;
+        background-color: white;
+        display: none;
+        overflow: hidden;
+    }
+    .button {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color: #008CBA;
+        position: absolute;
+    }
+    .button:hover{
+        background-color: grey;
+    }
+    * {box-sizing: border-box;}
+
+    /* Button used to open the contact form - fixed at the bottom of the page */
+    .open-button {
+        background-color: #555;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        opacity: 0.8;
+        position: fixed;
+        bottom: 23px;
+        right: 28px;
+        width: 280px;
+    }
+
+    /* The popup form - hidden by default */
+    .form-popup {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        right: 15px;
+        border: 3px solid #f1f1f1;
+        z-index: 9;
+    }
+
+    /* Add styles to the form container */
+    .form-container {
+        max-width: 300px;
+        padding: 10px;
+        background-color: white;
+    }
+
+    /* Full-width input fields */
+    .form-container input[type=text], .form-container input[type=number] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    /* When the inputs get focus, do something */
+    .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    /* Set a style for the submit/login button */
+    .form-container .btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom:10px;
+        opacity: 0.8;
+    }
+
+    /* Add a red background color to the cancel button */
+    .form-container .cancel {
+        background-color: red;
+    }
+
+
+    .form-container .btn:hover, .open-button:hover {
+        opacity: 1;
+    }
+    @media screen and (max-width: 700px) {
+        .row {
+            flex-direction: column;
+        }
+    }
+    .row {
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        -ms-flex-wrap: wrap; /* IE10 */
+        flex-wrap: wrap;
+    }
+
+    .side {
+        -ms-flex: 50%; /* IE10 */
+        flex: 50%;
+        background-color: white;
+        padding: 20px;
+    }
+
+    /* Main column */
+    .main {
+        -ms-flex: 50%; /* IE10 */
+        flex: 50%;
+        background-color: white;
+        padding: 20px;
+    }
+
+
+</style>
+<script src="weatherapp.js"></script>
+
+</body>
+</html>
